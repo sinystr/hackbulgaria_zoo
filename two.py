@@ -1,4 +1,5 @@
 class Zoo:
 
-    def roar():
-        return "Rumja"
+    def roar(self):
+        return "revass"
+
