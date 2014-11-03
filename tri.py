@@ -1,2 +1,0 @@
-def tri():
-    return "tri"
