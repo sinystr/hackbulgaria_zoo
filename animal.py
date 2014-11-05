@@ -10,8 +10,12 @@ class Animal:
         self.gender = gender
         self.weight = weight
 
+    def eat(self):
+        return 1, "meat"
+"""
     def grow(self):
 
-    def eat(self, )
+
 
     def e
+"""
