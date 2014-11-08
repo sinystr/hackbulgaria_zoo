@@ -1,6 +1,3 @@
-import json
-
-
 class Animal:
 
     def __init__(self, species, age, name, gender, weight):

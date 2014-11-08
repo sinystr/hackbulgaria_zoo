@@ -1,4 +1,5 @@
-import json
+import database_helper
+
 
 class Zoo():
 
@@ -11,7 +12,7 @@ class Zoo():
         self.capacity = capacity
         self.budget = budget
         self.animals = []
-        self.animals_database = self._read_database("database.txt")
+        self.animals_database = database_helper.read_database("database.txt")
 
     def _check_equal_species_name(self, animal):
         for existing_animal in self.animals:
@@ -33,11 +34,6 @@ class Zoo():
             if animal.is_dead is False:
                 new_animals_arr.append(animal)
         self.animals = new_animals_arr
-
-    def _read_database(self, file_name):
-        with open(file_name, 'r') as file_content:
-            file_data = json.load(file_content)
-        return file_data
 
     def monthly_budget_update(self):
         for animal in self.animals:
