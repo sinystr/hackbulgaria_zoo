@@ -11,6 +11,7 @@ class Animal:
         self.gender = gender
         self.weight = weight
         self._get_animal_stats()
+        self.is_dead = False
 
     # Loads the common stats for the species
     def _get_animal_stats(self):
@@ -21,7 +22,12 @@ class Animal:
         return self.age / self.species_info['life_expectancy']
 
     def try_die(self):
-        return random.random() < self._chance_of_dying()
+        if self.is_dead:
+            # If the animal is dead it cannot die!
+            return False
+        if random.random() < self._chance_of_dying():
+            self.is_dead = True
+        return self.is_dead
 
     def eat(self):
         return 1, "meat"

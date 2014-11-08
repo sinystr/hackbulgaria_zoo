@@ -32,5 +32,16 @@ class Animal_test(unittest.TestCase):
         self.assertTrue(False in results)
         self.assertTrue(True in results)
 
+    def test_try_cannot_die_twice(self):
+        results = []
+        life_expectancy = self.puh_panda.species_info['life_expectancy']
+        # making sure the chance is average
+        self.puh_panda.age = life_expectancy // 2
+        for i in range(0, 100):
+            results.append(self.puh_panda.try_die())
+
+        self.assertEqual(results.count(True), 1)
+
+
 if __name__ == '__main__':
     unittest.main()
