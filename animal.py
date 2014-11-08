@@ -31,7 +31,11 @@ class Animal:
         return self.is_dead
 
     def eat(self):
-        return 1, "meat"
+        food_per_kg = self.species_info['food_weight_ratio']
+        eaten_food = self.weight * food_per_kg
+        food_cost = config.FOODS_PRIZE[self.species_info['food_type']]
+        cost = eaten_food * food_cost
+        return int(cost)
 
 
 """

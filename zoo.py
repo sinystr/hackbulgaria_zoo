@@ -8,7 +8,7 @@ class Zoo():
         self.capacity = capacity
         self.budget = budget
         self.animals = []
-        self.animals_database = database_helper.read_database("database.txt")
+        self.animals_database = database_helper.read_database(config.DATABASE)
 
     def _check_equal_species_name(self, animal):
         for existing_animal in self.animals:
@@ -28,16 +28,13 @@ class Zoo():
     def _remove_dead_animal(self):
         new_animals_arr = []
         for animal in self.animals:
-            if animal.is_dead is False:
+            if not animal.is_dead:
                 new_animals_arr.append(animal)
         self.animals = new_animals_arr
 
-    def monthly_budget_update(self):
+    def _daily_budget_outcome(self):
+        cost, income = 0, 0
         for animal in self.animals:
-            food_quality, food = animal.eat()
-            food_cost = config.FOODS_PRIZE[food]
-            monthly_incomes = config.ANIMAL_INCOME_DAILY * config.MONTH_DAYS
-            eat_times_per_month = config.DAILY_TIMES_EAT * config.MONTH_DAYS
-            monthly_outcomes = food_quality * eat_times_per_month * food_cost
-            self.budget += (monthly_incomes - monthly_outcomes)
-            #maybe this method is FALSE!!!
+            cost += animal.eat() * config.DAILY_TIMES_EAT
+            income += config.ANIMAL_INCOME_DAILY
+        return income - cost

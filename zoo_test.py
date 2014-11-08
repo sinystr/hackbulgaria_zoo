@@ -57,6 +57,15 @@ class Zoo_test(unittest.TestCase):
         gosho_tiger = Animal("tiger", 4, "Gosho", "male", 30)
         self.assertTrue(self.zoopark._check_equal_species_name(gosho_tiger))
 
+    def test_dily_outcome(self):
+        gosho_tiger = Animal("tiger", 4, "Gosho", "male", 30)
+        self.zoopark.add_animal(gosho_tiger)
+        self.assertEqual(self.zoopark._daily_budget_outcome(), 24)
+
+    def test_dily_outcome_no_animals(self):
+        self.assertEqual(self.zoopark._daily_budget_outcome(), 0)
+
+'''
     def test_monthly_budget_update(self):
         self.zoopark.animals.append(self.puh_panda)
         gosho_tiger = Animal("tiger", 4, "Gosho", "male", 30)
@@ -78,7 +87,7 @@ class Zoo_test(unittest.TestCase):
 
 
     #def test_check_for_dead_animal(self):
-
+'''
 
 if __name__ == '__main__':
     unittest.main()
