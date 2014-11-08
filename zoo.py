@@ -1,12 +1,8 @@
 import database_helper
+import config
 
 
 class Zoo():
-
-    DAILY_TIMES_EAT = 3
-    DAYS_IN_MONTH = 30
-    INCOME_PER_DAY_FOR_ANIMAL = 60
-    FOODS_PRIZE = {"meat": 4, "others": 2, "foliage": 2, "grass": 2, "bamboo": 2}
 
     def __init__(self, capacity, budget):
         self.capacity = capacity
@@ -39,9 +35,9 @@ class Zoo():
     def monthly_budget_update(self):
         for animal in self.animals:
             food_quality, food = animal.eat()
-            food_cost = Zoo.FOODS_PRIZE[food]
-            monthly_incomes = Zoo.INCOME_PER_DAY_FOR_ANIMAL * Zoo.DAYS_IN_MONTH
-            eat_times_per_month = Zoo.DAILY_TIMES_EAT * Zoo.DAYS_IN_MONTH
+            food_cost = config.FOODS_PRIZE[food]
+            monthly_incomes = config.ANIMAL_INCOME_DAILY * config.MONTH_DAYS
+            eat_times_per_month = config.DAILY_TIMES_EAT * config.MONTH_DAYS
             monthly_outcomes = food_quality * eat_times_per_month * food_cost
             self.budget += (monthly_incomes - monthly_outcomes)
             #maybe this method is FALSE!!!

@@ -1,5 +1,6 @@
 import database_helper
 import random
+import config
 
 
 class Animal:
@@ -15,7 +16,7 @@ class Animal:
 
     # Loads the common stats for the species
     def _get_animal_stats(self):
-        animals_database = database_helper.read_database("database.txt")
+        animals_database = database_helper.read_database(config.DATABASE)
         self.species_info = animals_database[self.species]
 
     def _chance_of_dying(self):
