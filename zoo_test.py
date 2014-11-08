@@ -43,7 +43,7 @@ class Zoo_test(unittest.TestCase):
         self.zoopark.add_animal(gosho_tiger)
         ivan_elephant = Animal("elephant", 4, "Gosho", "male", 30)
         self.zoopark.add_animal(ivan_elephant)
-        self.assertEqual(len(self.zoopark.animals), 1)
+        self.assertEqual(len(self.zoopark.animals), 2)
 
     def test_check_equal_species_name_false(self):
         ivan_tiger = Animal("tiger", 4, "Ivan", "male", 30)

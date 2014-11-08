@@ -16,9 +16,10 @@ class Zoo():
 
     def _check_equal_species_name(self, animal):
         for existing_animal in self.animals:
-            if existing_animal.species == animal.species:
-                if existing_animal.name == animal.name:
-                    return True
+            has_same_species = existing_animal.species == animal.species
+            has_same_name = existing_animal.name == animal.name
+            if has_same_name and has_same_species:
+                return True
         return False
 
     def add_animal(self, animal):
