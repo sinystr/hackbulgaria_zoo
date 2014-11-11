@@ -50,5 +50,11 @@ class Animal_test(unittest.TestCase):
         self.assertEqual(self.puh_panda.age, 25)
         self.assertEqual(self.puh_panda.weight, 101.5)
 
+    def test_get_pregnant(self):
+        self.puh_panda.get_pregnant()
+        self.assertTrue(self.puh_panda.is_pregnant)
+        self.assertEqual(self.puh_panda.gestination_period, 0)
+        self.assertEqual(self.puh_panda.relax_period, 0)
+
 if __name__ == '__main__':
     unittest.main()

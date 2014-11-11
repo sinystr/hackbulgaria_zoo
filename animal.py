@@ -13,6 +13,9 @@ class Animal:
         self.weight = weight
         self._get_animal_stats()
         self.is_dead = False
+        self.is_pregnant = False
+        self.relax_period = age
+        self.gestination_period = 0
 
     # Loads the common stats for the species
     def _get_animal_stats(self):
@@ -44,3 +47,8 @@ class Animal:
         self.age += months
         adding_weight = self.species_info['weight_age_ration'] * months
         self.weight += adding_weight
+
+    def get_pregnant(self):
+        self.is_pregnant = True
+        self.gestination_period = 0
+        self.relax_period = 0

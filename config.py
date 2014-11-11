@@ -5,3 +5,5 @@ MONTH_DAYS = 31
 YEAR_MONTHS = 12
 ANIMAL_INCOME_DAILY = 60
 FOODS_PRIZE = {"meat": 4, "others": 2, "foliage": 2, "grass": 2, "bamboo": 2}
+RELAX_PERIOD = 6
+NAMES = ["Gosho", "Pesho", "Misho", "Lubo", "Maya", "Stefi", "Jane", "Petranka", "Vasilka", "Ivanka", "Vasil", "Ivan", "Oktay"]

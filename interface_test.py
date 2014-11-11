@@ -1,7 +1,6 @@
 from animal import Animal
 from zoo import Zoo
 import unittest
-import config
 
 
 class Zoo_test(unittest.TestCase):
@@ -80,30 +79,5 @@ class Zoo_test(unittest.TestCase):
         self.zoopark._update_zoo_budget(2)
         self.assertEqual(self.zoopark.budget, 2981)
 
-    def test_generate_name(self):
-        name = self.zoopark._generate_name()
-        self.assertIn(name, config.NAMES)
-
-    def test_generate_gender(self):
-        gender = self.zoopark._generate_gender()
-        self.assertIn(gender, ["male", "female"])
-
-    def test_accommodate(self):
-        new_zoo = Zoo(1, 5)
-        new_zoo.accommodate("tiger", 6, "misho", "male", 20)
-        self.assertEqual(len(new_zoo.animals), 1)
-
-    def test_accommodate_no_same_species(self):
-        new_zoo = Zoo(1, 5)
-        new_zoo.accommodate("pantera", 6, "misho", "male", 20)
-        self.assertEqual(len(new_zoo.animals), 0)
-
-    def test_move_to_habitat(self):
-        self.zoopark.add_animal(self.puh_panda)
-        self.zoopark.move_to_habitat("panda", "Puh")
-        self.assertEqual(len(self.zoopark.animals), 0)
-
-    def test_make_reproduction_moves(self):
-        pass
 if __name__ == '__main__':
     unittest.main()
