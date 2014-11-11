@@ -17,7 +17,10 @@ class Animal:
     # Loads the common stats for the species
     def _get_animal_stats(self):
         animals_database = database_helper.read_database(config.DATABASE)
-        self.species_info = animals_database[self.species]
+        if self.species in animals_database:
+            self.species_info = animals_database[self.species]
+        else:
+            return False
 
     def _chance_of_dying(self):
         return self.age / self.species_info['life_expectancy']
@@ -37,11 +40,7 @@ class Animal:
         cost = eaten_food * food_cost
         return int(cost)
 
-
-"""
-    def grow(self):
-
-
-
-    def e
-"""
+    def grow(self, months):
+        self.age += months
+        adding_weight = self.species_info['weight_age_ration'] * months
+        self.weight += adding_weight

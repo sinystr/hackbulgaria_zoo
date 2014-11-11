@@ -45,5 +45,10 @@ class Animal_test(unittest.TestCase):
     def test_eat(self):
         self.assertEqual(self.puh_panda.eat(), 60)
 
+    def test_grow(self):
+        self.puh_panda.grow(5)
+        self.assertEqual(self.puh_panda.age, 25)
+        self.assertEqual(self.puh_panda.weight, 101.5)
+
 if __name__ == '__main__':
     unittest.main()

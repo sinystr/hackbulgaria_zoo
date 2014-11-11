@@ -32,9 +32,18 @@ class Zoo():
                 new_animals_arr.append(animal)
         self.animals = new_animals_arr
 
-    def _daily_budget_outcome(self):
+    def _daily_budget_update(self):
         cost, income = 0, 0
         for animal in self.animals:
             cost += animal.eat() * config.DAILY_TIMES_EAT
             income += config.ANIMAL_INCOME_DAILY
         return income - cost
+
+    def monthly_budget_update(self):
+        day_budget = self._daily_budget_update()
+        return day_budget * config.MONTH_DAYS
+
+    def _update_zoo_budget(self, months):
+        month_budget = self.monthly_budget_update()
+        self.budget += months * month_budget
+
