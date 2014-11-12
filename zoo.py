@@ -41,7 +41,7 @@ class Zoo():
     def move_to_habitat(self, species, name):
         new_animals_arr = []
         for animal in self.animals:
-            if animal.species != species and animal.name != name:
+            if animal.species != species or animal.name != name:
                 new_animals_arr.append(animal)
             elif animal.species == species and animal.name == name:
                 print("The {}, {} is FREE!".format(animal.species,
