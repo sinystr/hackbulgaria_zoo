@@ -44,7 +44,8 @@ class Zoo():
             if animal.species != species and animal.name != name:
                 new_animals_arr.append(animal)
             elif animal.species == species and animal.name == name:
-                print("The {}, {} is FREE!".format(animal.species, animal.name))
+                print("The {}, {} is FREE!".format(animal.species,
+                                                   animal.name))
         self.animals = new_animals_arr
 
     def _daily_budget_update(self):
@@ -76,13 +77,67 @@ class Zoo():
 
     def born_animal(self, mother):
         animal_info = self.animals_database[mother.species]
-        baby_weight = animal_info["gender"]
+        baby_weight = animal_info["newborn_weight"]
         baby_name = self._generate_name()
         baby_species = mother.species
         baby_gender = self._generate_gender()
-        new_animal = Animal(baby_species, 0, baby_name, baby_gender, baby_weight)
+        new_animal = Animal(baby_species, 0,
+                            baby_name, baby_gender, baby_weight)
         self.add_animal(new_animal)
         return new_animal
 
-    def _make_reproduction_moves(self):
-        pass
+    def _give_me_female_one(self, animal1, animal2):
+        if animal1.gender == "female":
+            return animal1
+        else:
+            return animal2
+
+    def _pregnance_reqs_female(self, animal):
+        if animal.is_pregnant is False:
+            if animal.relax_period >= config.RELAX_PERIOD:
+                return True
+        return False
+
+    def make_reproduction_moves(self):
+        for animal1 in self.animals:
+            for animal2 in self.animals:
+                equal_species = animal1.species == animal2.species
+                different_genders = animal1.gender != animal2.gender
+                if equal_species and different_genders:
+                    female_one = self._give_me_female_one(animal1, animal2)
+                    if self._pregnance_reqs_female(female_one) is True:
+                        female_one.get_pregnant()
+                        print("A {} will be born".format(female_one.species))
+
+    def actions_with_pregnant_one(self, months):
+        for animal in self.animals:
+            is_female = animal.gender == "female"
+            is_pregnant = animal.is_pregnant is True
+            if is_female and is_pregnant:
+                animal.gestination_period += months
+                for_the_species = self.animals_database[animal.species]
+                species_gest_period = int(for_the_species["gestation_period"])
+                if animal.gestination_period >= species_gest_period:
+                    baby = self.born_animal(animal)
+                    difference = animal.gestination_period - species_gest_period
+                    baby.age += difference
+                    animal.relax_period = difference
+                    animal.gestination_period = 0
+                    print("The {} {} is born and it is {} months old".format(
+                                            baby.species, baby.name, baby.age))
+
+    def print_dead_animals(self):
+        for animal in self.animals:
+            animal.try_die()
+            if animal.is_dead:
+                print("{} the {} is dead :(".format(animal.name,
+                                                    animal.species))
+
+    def grow_animals(self, months):
+        for animal in self.animals:
+            animal.grow(months)
+
+    def can_feed_animals(self, months):
+        if self.budget > 0:
+            return True
+        return False

@@ -49,6 +49,16 @@ class Animal_test(unittest.TestCase):
         self.puh_panda.grow(5)
         self.assertEqual(self.puh_panda.age, 25)
         self.assertEqual(self.puh_panda.weight, 101.5)
+        self.assertEqual(self.puh_panda.relax_period, 25)
+        self.assertEqual(self.puh_panda.gestination_period, 0)
+        yana_tiger = Animal("tiger", 5, "Yana", "female", 30)
+        yana_tiger.is_pregnant = True
+        yana_tiger.grow(5)
+        self.assertEqual(yana_tiger.relax_period, 0)
+        ivo_tiger = Animal("tiger", 5, "Ivo", "female", 101)
+        ivo_tiger.grow(5)
+        #cannot get bigger anymore, it is fat enough
+        self.assertEqual(ivo_tiger.weight, 101)
 
     def test_get_pregnant(self):
         self.puh_panda.get_pregnant()

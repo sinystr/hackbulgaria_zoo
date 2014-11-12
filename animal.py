@@ -45,8 +45,13 @@ class Animal:
 
     def grow(self, months):
         self.age += months
-        adding_weight = self.species_info['weight_age_ration'] * months
-        self.weight += adding_weight
+        if self.weight < self.species_info['average_weight']:
+            adding_weight = self.species_info['weight_age_ration'] * months
+            self.weight += adding_weight
+        if self.is_pregnant is False:
+            self.relax_period += months
+        elif self.is_pregnant is True:
+            self.relax_period = 0
 
     def get_pregnant(self):
         self.is_pregnant = True
